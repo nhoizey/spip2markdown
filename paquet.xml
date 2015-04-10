@@ -1,0 +1,10 @@
+<paquet
+	prefix="spip2markdown"
+	categorie="outil"
+	version="0.0.1"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]">
+	<nom>Convertisseur des raccourcis typographiques SPIP vers Markdown</nom>
+	<auteur lien="https://twitter.com/nhoizey">Nicolas Hoizey</auteur>
+	<licence>MIT</licence>
+</paquet>

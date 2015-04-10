@@ -1,0 +1,22 @@
+<BOUCLE_article(ARTICLES){id_article}>#CACHE{0}
+[(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]}
+)][(#HTTP_HEADER{Content-Disposition: attachment; filename="[(#DATE|date_iso|couper{10})]-[(#URL_ARTICLE|replace{.*/,})].md"}
+)]---
+title:      #TITRE**
+date:       [(#DATE|date_iso|couper{10})]
+author:     <BOUCLE_article_auteur(AUTEURS){id_article}{", "}>#NOM</BOUCLE_article_auteur>
+lang:       #LANG
+categories: <BOUCLE_article_rubrique(RUBRIQUES){id_rubrique}{" "}>[(#TITRE|replace{" ","_"})]</BOUCLE_article_rubrique> <BOUCLE_article_mots(MOTS){id_article}{" "}>[(#TITRE|replace{" ","_"})]</BOUCLE_article_mots>
+logo:       [(#LOGO_ARTICLE||extraire_attribut{src}|url_absolue)]
+oldurl:     [(#URL_ARTICLE|url_absolue)]
+---
+[
+## (#SURTITRE**)][
+## (#SOUSTITRE**)][
+(#CHAPO**|spip2markdown)
+---
+]
+[(#TEXTE**|spip2markdown)]
+[
+(#PS**|spip2markdown)]
+</BOUCLE_article>
