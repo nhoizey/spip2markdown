@@ -7,6 +7,10 @@ function spip2markdown($text) {
   $text = spip2markdown_notes($text);
   $text = spip2markdown_codes($text);
   $text = spip2markdown_citations($text);
+  $text = spip2markdown_listes_non_ordonnees($text);
+  $text = spip2markdown_listes_ordonnees($text);
+
+  // ne devrait pas être là, trop spécifique à un usage
   $text = spip2markdown_youtube($text);
 
   return $text;
@@ -16,6 +20,7 @@ function spip2markdown_intertitres($text) {
   // SPIP     : {{{…}}}
   // Kramdown : ## …
   $text = preg_replace("/(^|[^{]){{{([^}]+)}}}([^}]|$)/u", "$1\n## $2\n$3", $text);
+  $text = preg_replace("/\n\n?(## [^\n]*)\n\n?/u", "\n$1\n", $text); // retrait des retours chariot en trop
 
   return $text;
 }
@@ -85,6 +90,32 @@ function spip2markdown_citations($text) {
     },
     $text
   );
+
+  return $text;
+}
+
+function spip2markdown_listes_non_ordonnees($text) {
+  // SPIP     : - ou -* en premier niveau, -** pour second niveau, etc.
+  // Kramdown : - avec indentations par multiples de 4 espaces
+  $text = preg_replace("/(^|\n)-\*? /u", "\n$1- ", $text); // ajout d'un retour chariot pour séparer d'un éventuel élément non liste
+  $text = preg_replace("/\n- ([^\n]*)\n\n- /u", "\n- $1\n- ", $text); // retrait des retours chariot en trop
+  $text = preg_replace("/\n- ([^\n]*)\n\n- /u", "\n- $1\n- ", $text); // retrait des retours chariot en trop
+  $text = preg_replace("/(^|\n)-\*\* /u", "$1    - ", $text);
+  $text = preg_replace("/(^|\n)-\*\*\* /u", "$1        - ", $text);
+  $text = preg_replace("/(^|\n)-\*\*\*\* /u", "$1            - ", $text);
+
+  return $text;
+}
+
+function spip2markdown_listes_ordonnees($text) {
+  // SPIP     : -# en premier niveau, -## pour second niveau, etc.
+  // Kramdown : 1. avec indentations par multiples de 4 espaces
+  $text = preg_replace("/(^|\n)-# /u", "\n${1}1. ", $text);
+  $text = preg_replace("/\n1\. ([^\n]*)\n\n1\. /u", "\n1. $1\n1. ", $text); // retrait des retours chariot en trop
+  $text = preg_replace("/\n1\. ([^\n]*)\n\n1\. /u", "\n1. $1\n1. ", $text); // retrait des retours chariot en trop
+  $text = preg_replace("/(^|\n)-## /u", "$1    1. ", $text);
+  $text = preg_replace("/(^|\n)-### /u", "$1        1. ", $text);
+  $text = preg_replace("/(^|\n)-#### /u", "$1            1. ", $text);
 
   return $text;
 }
