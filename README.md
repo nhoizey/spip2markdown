@@ -28,7 +28,7 @@ MIT
 - compléter les éléments de syntaxe manquants (images, documents, tableaux, etc.)
 - faire des squelettes pour les autres types de contenus (rubriques, brèves, etc.)
 - rendre paramétrables certaines fonctionnalités
- - forçage du téléchargement
+ - forçage du téléchargement (avec nom de fichier prédéfini) vs affichage dans le navigateur
  - présence du YAML Front Matter
  - syntaxe Kramdown ou autre
  - syntaxe très spécifique des vidéos Youtube *lazyloadées* avec [Jekyll Youtube Lazyloading](https://github.com/erossignon/jekyll-youtube-lazyloading)

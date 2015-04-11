@@ -1,26 +1,50 @@
 <?php
 function spip2markdown($text) {
-  // Intertitres
+  $text = spip2markdown_intertitres($text);
+  $text = spip2markdown_gras($text);
+  $text = spip2markdown_italiques($text);
+  $text = spip2markdown_liens($text);
+  $text = spip2markdown_notes($text);
+  $text = spip2markdown_codes($text);
+  $text = spip2markdown_citations($text);
+  $text = spip2markdown_youtube($text);
+
+  return $text;
+}
+
+function spip2markdown_intertitres($text) {
   // SPIP     : {{{…}}}
   // Kramdown : ## …
   $text = preg_replace("/(^|[^{]){{{([^}]+)}}}([^}]|$)/u", "$1\n## $2\n$3", $text);
 
-  // Gras
+  return $text;
+}
+
+function spip2markdown_gras($text) {
   // SPIP     : {{…}}
   // Kramdown : **…**
   $text = preg_replace("/(^|[^{]){{([^}]+)}}([^}]|$)/u", "$1**$2**$3", $text);
 
-  // Italique
+  return $text;
+}
+
+function spip2markdown_italiques($text) {
   // SPIP     : {…}
   // Kramdown : *…*
   $text = preg_replace("/(^|[^{]){([^}]+)}([^}]|$)/u", "$1*$2*$3", $text);
 
-  // Liens
+  return $text;
+}
+
+function spip2markdown_liens($text) {
   // SPIP     : [intitulé->lien]
   // Kramdown : [intitulé](lien)
   $text = preg_replace("/(^|[^\[])\[([^\]\[]+)->([^\]\[]+)\]([^\]]|$)/u", "$1[$2]($3)$4", $text);
 
-  // Notes de bas de page
+  return $text;
+}
+
+function spip2markdown_notes($text) {
   // SPIP     : [[…]]
   // Kramdown : [^n] dans le texte et [^n]: … en fin de contenu
   $text = preg_replace("/(^|[^\[])\[\[([^\[]|$)/u", "$1☞$2", $text);
@@ -38,12 +62,18 @@ function spip2markdown($text) {
   );
   $text .= $notes;
 
-  // Code
+  return $text;
+}
+
+function spip2markdown_codes($text) {
   // SPIP     : <code>…</code>
   // Kramdown : ```…```
   $text = preg_replace("/<\/?code>/u", "```", $text);
 
-  // Citation
+  return $text;
+}
+
+function spip2markdown_citations($text) {
   // SPIP     : <quote>…</quote>
   // Kramdown : >
   $text = preg_replace("/<quote>/u", "☞", $text);
@@ -56,7 +86,10 @@ function spip2markdown($text) {
     $text
   );
 
-  // Vidéos Youtube
+  return $text;
+}
+
+function spip2markdown_youtube($text) {
   // SPIP / HTML             : <iframe src="https://www.youtube.com/embed/…"></iframe>
   // Jekyll Youtube Lazyload : {% youtube … %} cf https://github.com/erossignon/jekyll-youtube-lazyloading
   $text = preg_replace("/<iframe width=\"[0-9]+\" height=\"[0-9]+\" src=\"https:\/\/www\.youtube\.com\/embed\/([^\"]+)\" frameborder=\"0\" allowfullscreen><\/iframe>/u", "{% youtube $1 %}", $text);
