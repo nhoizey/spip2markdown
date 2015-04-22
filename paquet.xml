@@ -1,7 +1,7 @@
 <paquet
 	prefix="spip2markdown"
 	categorie="outil"
-	version="0.0.1"
+	version="0.0.4"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]">
 	<nom>SPIP → Markdown</nom>
