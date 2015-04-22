@@ -4,8 +4,9 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-  'titre_page_configurer_spip2markdown' => 'Paramétrages de SPIP 2 Markdown',
-  'cfg_titre_parametrages' => 'Paramétrages de SPIP 2 Markdown',
-  'telechargement' => 'Forcer le téléchargement, avec un nom de fichier prédéfini ?',
-  'youtube' => 'Convertir les iframe Youtube ?'
+  'spip2markdown' => 'SPIP → Markdown',
+  'titre_page_configurer' => 'Paramétrages de SPIP → Markdown',
+  'cfg_titre' => 'Paramètres',
+  'cfg_telechargement' => 'Forcer le téléchargement, avec un nom de fichier prédéfini ?',
+  'cfg_youtube' => 'Convertir les iframe Youtube ?',
 );
