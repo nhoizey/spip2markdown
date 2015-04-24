@@ -3,7 +3,8 @@
 	categorie="outil"
 	version="0.0.4"
 	etat="dev"
-	compatibilite="[3.0.0;3.1.*]">
+  logo="prive/themes/spip/images/spip2markdown-32.png"
+  compatibilite="[3.0.0;3.1.*]">
 	<nom>SPIP → Markdown</nom>
 	<auteur lien="https://twitter.com/nhoizey">Nicolas Hoizey</auteur>
 	<licence>MIT</licence>
