@@ -9,7 +9,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'cfg_titre' => 'Paramètres',
   'cfg_telechargement' => 'Forcer le téléchargement, avec un nom de fichier prédéfini ?',
   'cfg_youtube' => 'Convertir les iframe Youtube ?',
-  'telecharger' => 'Télécharger',
+  'voir' => 'Voir',
+  'ou' => 'ou',
+  'telecharger' => 'télécharger',
   'contenu_en_markdown' => 'le contenu en Markdown',
   'zip_pieces_jointes' => 'le zip des pièces jointes :'
 );

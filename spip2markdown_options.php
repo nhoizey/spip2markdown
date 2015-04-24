@@ -9,6 +9,7 @@ function spip2markdown($text) {
   $text = spip2markdown_citations($text);
   $text = spip2markdown_listes_non_ordonnees($text);
   $text = spip2markdown_listes_ordonnees($text);
+  $text = spip2markdown_documents($text);
 
   // ne devrait pas être là, trop spécifique à un usage
   $text = spip2markdown_youtube($text);
@@ -116,6 +117,41 @@ function spip2markdown_listes_ordonnees($text) {
   $text = preg_replace("/(^|\n)-## /u", "$1    1. ", $text);
   $text = preg_replace("/(^|\n)-### /u", "$1        1. ", $text);
   $text = preg_replace("/(^|\n)-#### /u", "$1            1. ", $text);
+
+  return $text;
+}
+
+function spip2markdown_documents($text) {
+  // SPIP     : <doc…|…> ou <img…|…> ou <emb…|…>
+  // Kramdown :
+  // - <figure>{% picture blah-blah.jpg %}<figcaption>blah…</figcaption></figure> pour les images
+  //   cf https://github.com/gettalong/kramdown/issues/48#issuecomment-16698925
+  // - ou un lien
+  $text = preg_replace_callback(
+    "/<(doc|img|emb)([0-9]+)[^0-9>]*>/u",
+    function($match) {
+      $doc_id = $match[2];
+      $doc = sql_fetsel("titre, descriptif, fichier, mode, media", "spip_documents", "id_document=$doc_id");
+      if ($doc['media'] == "image") {
+        $doc_str = "\n<figure>\n  {% picture " . basename($doc['fichier']) . " %}";
+        if (strlen($doc['titre']) > 0 || strlen($doc['descriptif']) > 0) {
+          $doc_str .= "\n  <figcaption>";
+          if (strlen($doc['titre']) > 0) {
+            $doc_str .= "\n    " . spip2markdown($doc['titre']);
+          }
+          if (strlen($doc['descriptif']) > 0) {
+            $doc_str .= "\n\n    " . spip2markdown($doc['descriptif']);
+          }
+          $doc_str .= "\n  </figcaption>";
+        }
+        $doc_str .= "\n</figure>";
+      } else {
+        $doc_str = "[" . $doc['titre'] . "](" . basename($doc['fichier']) . ")";
+      }
+      return $doc_str;
+    },
+    $text
+  );
 
   return $text;
 }
