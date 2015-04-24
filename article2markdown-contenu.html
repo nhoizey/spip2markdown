@@ -1,7 +1,4 @@
-<BOUCLE_article(ARTICLES){id_article}>#CACHE{0}
-[(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]}
-)][(#HTTP_HEADER{Content-Disposition: attachment; filename="[(#DATE|date_iso|couper{10})]-[(#URL_ARTICLE|replace{.*/,})].md"}
-)]---
+<BOUCLE_article(ARTICLES){id_article}>---
 title:      #TITRE**
 date:       [(#DATE|date_iso|couper{10})]
 author:     <BOUCLE_article_auteur(AUTEURS){id_article}{", "}>#NOM</BOUCLE_article_auteur>
