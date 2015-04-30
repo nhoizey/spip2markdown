@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'voir' => 'Voir',
   'ou' => 'ou',
   'telecharger' => 'télécharger',
+  'telecharger2' => 'Télécharger',
   'contenu_en_markdown' => 'le contenu en Markdown',
   'zip_pieces_jointes' => 'le zip des pièces jointes :'
 );
