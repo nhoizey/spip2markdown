@@ -3,13 +3,13 @@
   [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
   [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
   <form method="post" action="#ENV{action}">
+    <input type="hidden" name="_meta_casier" value="spip2markdown" />
     <div>
       #ACTION_FORMULAIRE{#ENV{action}}
       <ul>
-        [(#SAISIE{case, telechargement, label=<:spip2markdown:cfg_telechargement:>})]
         [(#SAISIE{case, youtube, label=<:spip2markdown:cfg_youtube:>})]
+        [(#SAISIE{case, twitter, label=<:spip2markdown:cfg_twitter:>})]
       </ul>
-      <input type="hidden" name="_meta_casier" value="prefixe" />
       <p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
     </div>
   </form>

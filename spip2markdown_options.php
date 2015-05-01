@@ -1,4 +1,6 @@
 <?php
+include_spip('inc/config');
+
 function spip2markdown($text) {
   list($text, $code) = spip2markdown_extraire_code($text);
   $text = spip2markdown_liens($text);
@@ -12,9 +14,13 @@ function spip2markdown($text) {
   $text = spip2markdown_documents($text);
   $text = spip2markdown_reinserer_code($text, $code);
 
-  // ne devraient pas être actifs par défaut, trop spécifiques à mon propre usage
-  $text = spip2markdown_youtube($text);
-  $text = spip2markdown_twitter($text);
+  if(lire_config("spip2mardown/youtube") == "on") {
+    $text = spip2markdown_youtube($text);
+  }
+
+  if(lire_config("spip2mardown/twitter") == "on") {
+    $text = spip2markdown_twitter($text);
+  }
 
   return $text;
 }
