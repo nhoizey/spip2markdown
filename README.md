@@ -1,10 +1,10 @@
 # SPIP → Markdown
 
-Convertisseur des raccourcis typographiques SPIP vers Markdown.
+Plugin pour le CMS [SPIP](http://spip.net) facilitant la migration de sa syntaxe spécifique vers Markdown.
 
 ## Mode d'emploi
 
-1. Installez et activez le plugin
+1. Installez et activez le plugin et ses dépendances [Saisies](http://plugins.spip.net/saisies.html) et [zippeur](http://plugins.spip.net/zippeur.html)
 2. Chargez la page d'un article dans le back office
 3. Voilà en colonne de gauche des liens pour voir ou télécharger le contenu de l'article en Markdown — ou plutôt [Kramdown](http://kramdown.gettalong.org/syntax.html), une variante —, avec les méta données présentées dans le [YAML Front Matter](http://jekyllrb.com/docs/frontmatter/), ainsi que les éventuelles pièces jointes (images et documents)
 4. Vous pouvez aussi utiliser le filtre `|spip2markdown` dans vos propres squelettes
@@ -36,6 +36,7 @@ MIT
  - présence du YAML Front Matter
  - syntaxe Kramdown ou autre
  - syntaxe très spécifique des vidéos Youtube *lazyloadées* avec [Jekyll Youtube Lazyloading](https://github.com/erossignon/jekyll-youtube-lazyloading) et des embeds de tweets
+- proposer un export global du site en arborescence Jekyll
 - écrire des tests unitaires
 - migrer en textwheel ?
 
