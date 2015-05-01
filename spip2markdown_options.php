@@ -224,7 +224,7 @@ function spip2markdown_documents($text) {
 function spip2markdown_youtube($text) {
   // SPIP / HTML             : <iframe src="https://www.youtube.com/embed/…"></iframe>
   // Jekyll Youtube Lazyload : {% youtube … %} cf https://github.com/erossignon/jekyll-youtube-lazyloading
-  $text = preg_replace("/<iframe [^>]*src=\"https?:\/\/www\.youtube\.com\/embed\/([^\"]+)\"[^>]*><\/iframe>/u", "{% youtube $1 %}", $text);
+  $text = preg_replace("/<iframe [^>]*src=\"https?:\/\/www\.youtube\.com\/embed\/([^\"\?]+)(\?[^\"]+)?\"[^>]*><\/iframe>/u", "{% youtube $1 %}", $text);
 
   return $text;
 }
