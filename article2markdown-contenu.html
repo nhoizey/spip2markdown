@@ -1,11 +1,11 @@
 <BOUCLE_article(ARTICLES){id_article}>---
 title:      #TITRE**
 date:       [(#DATE|date_iso|couper{10})]
-author:     <BOUCLE_article_auteur(AUTEURS){id_article}{", "}>#NOM</BOUCLE_article_auteur>
+author:     <BOUCLE_article_auteur(AUTEURS){id_article}{", "}>#NOM**</BOUCLE_article_auteur>
 lang:       #LANG
-tags:       [<BOUCLE_article_mots(MOTS){id_article}{", "}>[(#TITRE|replace{" ","-"}|strtolower)]</BOUCLE_article_mots>]
+tags:       [<BOUCLE_article_mots(MOTS){id_article}{", "}>#TITRE**</BOUCLE_article_mots>]
 logo:       [(#LOGO_ARTICLE||extraire_attribut{src}|url_absolue)]
-url:     [(#URL_ARTICLE|url_absolue)]
+url:        [(#URL_ARTICLE|url_absolue)]
 ---
 [
 ## (#SURTITRE**)][
