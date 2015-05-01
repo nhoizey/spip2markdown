@@ -79,7 +79,7 @@ function spip2markdown_liens($text) {
           $libelle = $match[1];
         }
       }
-      if (preg_match("/(a|art|article)([0-9]+)/", $match[2], $match_art)) {
+      if (preg_match("/^(a|art|article)([0-9]+)$/", $match[2], $match_art)) {
         $spip_article = sql_fetsel("titre, date", "spip_articles", "id_article=" . $match_art[2]);
         if ($libelle === '') {
           $libelle = $spip_article['titre'];
@@ -89,7 +89,7 @@ function spip2markdown_liens($text) {
       } else {
         $url = $match[2];
       }
-      if ($libelle === '') {
+      if ($libelle === '' || $libelle === $url) {
         return "<" . $url . ">";
       } else {
         return "[" . $libelle . "](" . $url . ")";
