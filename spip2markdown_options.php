@@ -57,9 +57,40 @@ function spip2markdown_reinserer_code($text, $code) {
 }
 
 function spip2markdown_liens($text) {
-  // SPIP     : [intitulé->lien]
-  // Kramdown : [intitulé](lien)
-  $text = preg_replace("/(^|[^\[])\[([^\]\[]+)->([^\]\[]+)\]([^\]]|$)/u", "$1[$2]($3)$4", $text);
+  // Liens sans libellé
+  // SPIP     : [libellé->url]
+  // Kramdown : [libellé](url) ou <url> si libellé vide
+  $text = preg_replace_callback(
+    "/\[([^\]]*)->([^\]]+)\]/u",
+    function($match) {
+      $libelle = '';
+      $url = '';
+
+      if ($match[1] !== '') {
+        if (preg_match("/(.+)\{([a-z]{2})\}$/u", $match[1], $match_lang)) {
+          $libelle = $match_lang[1] . " (" . $match_lang[2] . ")";
+        } else {
+          $libelle = $match[1];
+        }
+      }
+      if (preg_match("/(a|art|article)([0-9]+)/", $match[2], $match_art)) {
+        $spip_article = sql_fetsel("titre, date", "spip_articles", "id_article=" . $match_art[2]);
+        if ($libelle === '') {
+          $libelle = $spip_article['titre'];
+        }
+        $spip_url = sql_fetsel("url", "spip_urls", "type='article' AND id_objet=" . $match_art[2], "", "date DESC", "0,1");
+        $url = preg_replace("/^([0-9]{4})-([0-9]{2})-.*$/u", "/$1/$2/", $spip_article['date']) . $spip_url['url'] . ".html";
+      } else {
+        $url = $match[2];
+      }
+      if ($libelle === '') {
+        return "<" . $url . ">";
+      } else {
+        return "[" . $libelle . "](" . $url . ")";
+      }
+    },
+    $text
+  );
 
   return $text;
 }
