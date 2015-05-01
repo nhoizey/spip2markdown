@@ -13,6 +13,7 @@ function spip2markdown($text) {
 
   // ne devrait pas être là, trop spécifique à un usage
   $text = spip2markdown_youtube($text);
+  $text = spip2markdown_twitter($text);
 
   return $text;
 }
@@ -160,6 +161,20 @@ function spip2markdown_youtube($text) {
   // SPIP / HTML             : <iframe src="https://www.youtube.com/embed/…"></iframe>
   // Jekyll Youtube Lazyload : {% youtube … %} cf https://github.com/erossignon/jekyll-youtube-lazyloading
   $text = preg_replace("/<iframe width=\"[0-9]+\" height=\"[0-9]+\" src=\"https:\/\/www\.youtube\.com\/embed\/([^\"]+)\" frameborder=\"0\" allowfullscreen><\/iframe>/u", "{% youtube $1 %}", $text);
+  return $text;
+}
+
+function spip2markdown_twitter($text) {
+  // SPIP / HTML    : <blockquote class="twitter-tweet">…<a href="https://twitter.com/mariejulien/statuses/354870574595584000">…</a></blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  // Jekyll Twitter : {% twitter oembed … %} cf https://github.com/rob-murray/jekyll-twitter-plugin
+  $text = preg_replace_callback(
+    "/<blockquote class=\"twitter-tweet\">(.*)(?<!<\/blockquote>)<\/blockquote>/u",
+    function($match) {
+      return preg_replace("/.*<a href=\"(https:\/\/twitter.com\/[^\/]+\/statuses\/[^\"]+)\">[^<]+<\/a>$/u", "{% twitter oembed $1 %}", $match[1]);
+    },
+    $text
+  );
+  $text = str_replace("<script async src=\"//platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>", "", $text);
 
   return $text;
 }
