@@ -12,7 +12,7 @@ function spip2markdown($text) {
   $text = spip2markdown_documents($text);
   $text = spip2markdown_reinserer_code($text, $code);
 
-  // ne devrait pas être là, trop spécifique à un usage
+  // ne devraient pas être actifs par défaut, trop spécifiques à mon propre usage
   $text = spip2markdown_youtube($text);
   $text = spip2markdown_twitter($text);
 
