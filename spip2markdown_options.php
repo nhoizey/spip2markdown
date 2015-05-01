@@ -1,11 +1,11 @@
 <?php
 function spip2markdown($text) {
   list($text, $code) = spip2markdown_extraire_code($text);
+  $text = spip2markdown_liens($text);
+  $text = spip2markdown_notes($text);
   $text = spip2markdown_intertitres($text);
   $text = spip2markdown_gras($text);
   $text = spip2markdown_italiques($text);
-  $text = spip2markdown_liens($text);
-  $text = spip2markdown_notes($text);
   $text = spip2markdown_citations($text);
   $text = spip2markdown_listes_non_ordonnees($text);
   $text = spip2markdown_listes_ordonnees($text);
@@ -56,31 +56,6 @@ function spip2markdown_reinserer_code($text, $code) {
   return $text;
 }
 
-function spip2markdown_intertitres($text) {
-  // SPIP     : {{{…}}}
-  // Kramdown : ## …
-  $text = preg_replace("/(^|[^{]){{{([^}]+)}}}([^}]|$)/u", "$1\n## $2\n$3", $text);
-  $text = preg_replace("/\n\n?(## [^\n]*)\n\n?/u", "\n$1\n", $text); // retrait des retours chariot en trop
-
-  return $text;
-}
-
-function spip2markdown_gras($text) {
-  // SPIP     : {{…}}
-  // Kramdown : **…**
-  $text = preg_replace("/(^|[^{]){{([^}]+)}}([^}]|$)/u", "$1**$2**$3", $text);
-
-  return $text;
-}
-
-function spip2markdown_italiques($text) {
-  // SPIP     : {…}
-  // Kramdown : *…*
-  $text = preg_replace("/(^|[^{]){([^}]+)}([^}]|$)/u", "$1*$2*$3", $text);
-
-  return $text;
-}
-
 function spip2markdown_liens($text) {
   // SPIP     : [intitulé->lien]
   // Kramdown : [intitulé](lien)
@@ -106,6 +81,31 @@ function spip2markdown_notes($text) {
     $text
   );
   $text .= $notes;
+
+  return $text;
+}
+
+function spip2markdown_intertitres($text) {
+  // SPIP     : {{{…}}}
+  // Kramdown : ## …
+  $text = preg_replace("/(^|[^{]){{{([^}]+)}}}([^}]|$)/u", "$1\n## $2\n$3", $text);
+  $text = preg_replace("/\n\n?(## [^\n]*)\n\n?/u", "\n$1\n", $text); // retrait des retours chariot en trop
+
+  return $text;
+}
+
+function spip2markdown_gras($text) {
+  // SPIP     : {{…}}
+  // Kramdown : **…**
+  $text = preg_replace("/(^|[^{]){{([^}]+)}}([^}]|$)/u", "$1**$2**$3", $text);
+
+  return $text;
+}
+
+function spip2markdown_italiques($text) {
+  // SPIP     : {…}
+  // Kramdown : *…*
+  $text = preg_replace("/(^|[^{]){([^}]+)}([^}]|$)/u", "$1*$2*$3", $text);
 
   return $text;
 }
