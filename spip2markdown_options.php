@@ -14,11 +14,11 @@ function spip2markdown($text) {
   $text = spip2markdown_documents($text);
   $text = spip2markdown_reinserer_code($text, $code);
 
-  if(lire_config("spip2markdown/youtube") == "on") {
+  if(lire_config("spip2markdown/youtube") == "oui") {
     $text = spip2markdown_youtube($text);
   }
 
-  if(lire_config("spip2markdown/twitter") == "on") {
+  if(lire_config("spip2markdown/twitter") == "oui") {
     $text = spip2markdown_twitter($text);
   }
 
