@@ -1,13 +1,13 @@
-# spip2markdown
+# SPIP → Markdown
 
 Convertisseur des raccourcis typographiques SPIP vers Markdown.
 
 ## Mode d'emploi
 
 1. Installez et activez le plugin
-2. Chargez la page ```/?page=article2markdown&id_article=…``` avec l'id d'article de votre choix
-3. Voilà le contenu de l'article proposé en Markdown — ou plutôt [Kramdown](http://kramdown.gettalong.org/syntax.html), une variante —, avec les méta données présentées dans le [YAML Front Matter](http://jekyllrb.com/docs/frontmatter/)
-4. Vous pouvez aussi utiliser le filtre ```spip2markdown``` dans vos propres squelettes
+2. Chargez la page d'un article dans le back office
+3. Voilà en colonne de gauche des liens pour voir ou télécharger le contenu de l'article en Markdown — ou plutôt [Kramdown](http://kramdown.gettalong.org/syntax.html), une variante —, avec les méta données présentées dans le [YAML Front Matter](http://jekyllrb.com/docs/frontmatter/), ainsi que les éventuelles pièces jointes (images et documents)
+4. Vous pouvez aussi utiliser le filtre `|spip2markdown` dans vos propres squelettes
 
 ## Éléments de syntaxe gérés
 
@@ -16,7 +16,9 @@ Convertisseur des raccourcis typographiques SPIP vers Markdown.
 - italiques
 - liens
 - notes de bas de page
-- codes en ligne (blocs de code à traiter)
+- codes en ligne et en bloc
+- images
+- documents
 - citations
 - listes ordonnées et non ordonnées, sur plusieurs niveaux
 
@@ -26,15 +28,14 @@ MIT
 
 ## To do
 
-- compléter les éléments de syntaxe manquants (blocs de code, images, documents, tableaux, etc.)
+- compléter les éléments de syntaxe manquants (tableaux, etc.)
 - faire des squelettes pour les autres types de contenus (rubriques, brèves, etc.)
 - remplacer les liens ```->art…```, ```->rub…```, etc. par l'URL du contenu lié
 - rendre paramétrables certaines fonctionnalités :
  - forçage du téléchargement (avec nom de fichier prédéfini) vs affichage dans le navigateur
  - présence du YAML Front Matter
  - syntaxe Kramdown ou autre
- - syntaxe très spécifique des vidéos Youtube *lazyloadées* avec [Jekyll Youtube Lazyloading](https://github.com/erossignon/jekyll-youtube-lazyloading)
-- proposer de générer un zip avec le contenu en Markdown/Kramdown et les ressources (images, documents, etc.)
+ - syntaxe très spécifique des vidéos Youtube *lazyloadées* avec [Jekyll Youtube Lazyloading](https://github.com/erossignon/jekyll-youtube-lazyloading) et des embeds de tweets
 - écrire des tests unitaires
 - migrer en textwheel ?
 
