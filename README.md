@@ -14,7 +14,7 @@ Plugin pour le CMS [SPIP](http://spip.net) facilitant la migration de sa syntaxe
 - intertitres
 - gras
 - italiques
-- liens
+- liens, y compris internes vers des articles
 - notes de bas de page
 - codes en ligne et en bloc
 - images
@@ -30,7 +30,7 @@ MIT
 
 - compléter les éléments de syntaxe manquants (tableaux, etc.)
 - faire des squelettes pour les autres types de contenus (rubriques, brèves, etc.)
-- remplacer les liens ```->art…```, ```->rub…```, etc. par l'URL du contenu lié
+- compléter les liens internes (`->rub…`, `->doc…`, etc.)
 - rendre paramétrables certaines fonctionnalités :
  - forçage du téléchargement (avec nom de fichier prédéfini) vs affichage dans le navigateur
  - présence du YAML Front Matter
