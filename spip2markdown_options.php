@@ -209,7 +209,7 @@ function spip2markdown_documents($text) {
           }
           $doc_str .= "  </figcaption>";
         }
-        $doc_str .= "\n</figure>";
+        $doc_str .= "\n</figure>\n";
       } else {
         $doc_str = "[" . $doc['titre'] . "](" . basename($doc['fichier']) . ")";
       }
