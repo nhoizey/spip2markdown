@@ -1,19 +1,57 @@
 <?php
 function spip2markdown($text) {
+  list($text, $code) = spip2markdown_extraire_code($text);
   $text = spip2markdown_intertitres($text);
   $text = spip2markdown_gras($text);
   $text = spip2markdown_italiques($text);
   $text = spip2markdown_liens($text);
   $text = spip2markdown_notes($text);
-  $text = spip2markdown_codes($text);
   $text = spip2markdown_citations($text);
   $text = spip2markdown_listes_non_ordonnees($text);
   $text = spip2markdown_listes_ordonnees($text);
   $text = spip2markdown_documents($text);
+  $text = spip2markdown_reinserer_code($text, $code);
 
   // ne devrait pas être là, trop spécifique à un usage
   $text = spip2markdown_youtube($text);
   $text = spip2markdown_twitter($text);
+
+  return $text;
+}
+
+function spip2markdown_extraire_code($text) {
+  $code = [];
+
+  $text = preg_replace("/<code([^>]*>)/u", "☞$1", $text);
+  $text = preg_replace("/<\/code>/u", "☜", $text);
+  $count = 0;
+  $text = preg_replace_callback(
+    "/☞([^☜]+)☜/u",
+    function($match) use (&$count, &$code) {
+      $code[$count] = $match[1];
+      return "@CODE@" . $count++ . "@CODE@";
+    },
+    $text
+  );
+
+  return array($text, $code);
+}
+
+function spip2markdown_reinserer_code($text, $code) {
+  // SPIP     : <code>…</code>
+  // Kramdown : ~~~\n~~~ pour code en bloc et `…` pour code en ligne
+
+  // réinsertion du code préalablement extrait
+  foreach ($code as $key => $value) {
+    $text = str_replace("@CODE@" . $key . "@CODE@", "<code" . $value . "</code>", $text);
+  }
+
+  // code en bloc
+  $text = preg_replace("/\n<code( class=\"([^\"]+)\")?>\n/u", "\n~~~ $2\n", $text);
+  $text = preg_replace("/\n<\/code>\n/u", "\n~~~\n", $text);
+
+  // code en ligne
+  $text = preg_replace("/<\/?code>/u", "`", $text);
 
   return $text;
 }
@@ -68,14 +106,6 @@ function spip2markdown_notes($text) {
     $text
   );
   $text .= $notes;
-
-  return $text;
-}
-
-function spip2markdown_codes($text) {
-  // SPIP     : <code>…</code>
-  // Kramdown : ```…```
-  $text = preg_replace("/<\/?code>/u", "```", $text);
 
   return $text;
 }
