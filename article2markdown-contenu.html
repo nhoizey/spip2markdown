@@ -1,11 +1,13 @@
-<BOUCLE_article(ARTICLES){id_article}>---
-title:      #TITRE**
-date:       [(#DATE|date_iso|couper{10})]
-author:     <BOUCLE_article_auteur(AUTEURS){id_article}{", "}>#NOM**</BOUCLE_article_auteur>
-lang:       #LANG
-tags:       [<BOUCLE_article_mots(MOTS){id_article}{", "}>#TITRE**</BOUCLE_article_mots>]
-logo:       [(#LOGO_ARTICLE||extraire_attribut{src}|url_absolue)]
-url:        [(#URL_ARTICLE|url_absolue)]
+<BOUCLE_article(ARTICLES){id_article}>---[(#CONFIG{spip2markdown/title}|=={oui}|oui)
+title:      #TITRE**][(#CONFIG{spip2markdown/date_iso}|=={oui}|oui)
+date:       [(#DATE|date_iso|couper{10})]][(#CONFIG{spip2markdown/authors}|=={oui}|oui)
+author:     #INCLURE{fond=article2markdown_auteurs,env}][(#CONFIG{spip2markdown/lang}|=={oui}|oui)
+lang:       #LANG][(#CONFIG{spip2markdown/categories}|=={""}|non)
+categories: #INCLURE{fond=article2markdown-categories,env}][(#CONFIG{spip2markdown/tags}|=={""}|non)
+tags:       #INCLURE{fond=article2markdown-tags,env}][(#CONFIG{spip2markdown/logo}|=={oui}|oui)
+logo:       [(#LOGO_ARTICLE||extraire_attribut{src}|url_absolue)]][(#CONFIG{spip2markdown/url}|=={oui}|oui)
+url:        [(#URL_ARTICLE|url_absolue)]][(#CONFIG{spip2markdown/id}|=={oui}|oui)
+id:         #ID_ARTICLE]
 ---
 [
 ## (#SURTITRE**)][

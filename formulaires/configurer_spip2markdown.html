@@ -5,6 +5,21 @@
   <form method="post" action="#ENV{action}">
     <div>
       #ACTION_FORMULAIRE{#ENV{action}}
+      <fieldset>
+        <legend>Configuration du YAML Front Matter</legend>
+        <ul>
+          [(#SAISIE{oui_non, title, label=<:spip2markdown:cfg_yfm_title:>, defaut=oui, valeur_oui=oui, valeur_non=non})]
+          [(#SAISIE{oui_non, date_iso, label=<:spip2markdown:cfg_yfm_date:>, defaut=oui, valeur_oui=oui, valeur_non=non})]
+          [(#SAISIE{oui_non, authors, label=<:spip2markdown:cfg_yfm_authors:>, defaut=oui, valeur_oui=oui, valeur_non=non})]
+          [(#SAISIE{oui_non, lang, label=<:spip2markdown:cfg_yfm_lang:>, defaut=oui, valeur_oui=oui, valeur_non=non})]
+          [(#SAISIE{input, categories, label=<:spip2markdown:cfg_yfm_categories:>, explication=<:spip2markdown:cfg_yfm_categories_explication:>})]
+          [(#SAISIE{input, tags, label=<:spip2markdown:cfg_yfm_tags:>, explication=<:spip2markdown:cfg_yfm_tags_explication:>})]
+          [(#SAISIE{oui_non, logo, label=<:spip2markdown:cfg_yfm_logo:>, defaut=oui, valeur_oui=oui, valeur_non=non})]
+          [(#SAISIE{oui_non, url, label=<:spip2markdown:cfg_yfm_url:>, defaut=oui, valeur_oui=oui, valeur_non=non})]
+          [(#SAISIE{oui_non, id, label=<:spip2markdown:cfg_yfm_id:>, defaut=oui, valeur_oui=oui, valeur_non=non})]
+        </ul>
+      </fieldset>
+      <fieldset>
         <legend>Configurations spécifiques à des plugins Jekyll</legend>
         <ul>
           [(#SAISIE{oui_non, youtube, label=<:spip2markdown:cfg_youtube:>, defaut=non, valeur_oui=oui, valeur_non=non, explication=<:spip2markdown:cfg_youtube_explication:>})]
