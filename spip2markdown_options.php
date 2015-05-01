@@ -134,16 +134,19 @@ function spip2markdown_documents($text) {
       $doc_id = $match[2];
       $doc = sql_fetsel("titre, descriptif, fichier, mode, media", "spip_documents", "id_document=$doc_id");
       if ($doc['media'] == "image") {
-        $doc_str = "\n<figure>\n  {% picture " . basename($doc['fichier']) . " %}";
+        $doc_str = "<figure>\n  {% picture " . basename($doc['fichier']) . " %}";
         if (strlen($doc['titre']) > 0 || strlen($doc['descriptif']) > 0) {
           $doc_str .= "\n  <figcaption>";
           if (strlen($doc['titre']) > 0) {
             $doc_str .= "\n    " . spip2markdown($doc['titre']);
           }
           if (strlen($doc['descriptif']) > 0) {
-            $doc_str .= "\n\n    " . spip2markdown($doc['descriptif']);
+            if (strlen($doc['titre']) > 0) {
+              $doc_str .=  ". ";
+            }
+            $doc_str .= spip2markdown($doc['descriptif']);
           }
-          $doc_str .= "\n  </figcaption>";
+          $doc_str .= "  </figcaption>";
         }
         $doc_str .= "\n</figure>";
       } else {
