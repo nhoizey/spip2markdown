@@ -202,13 +202,13 @@ function spip2markdown_twitter($text) {
   // SPIP / HTML    : <blockquote class="twitter-tweet">…<a href="https://twitter.com/mariejulien/statuses/354870574595584000">…</a></blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
   // Jekyll Twitter : {% twitter oembed … %} cf https://github.com/rob-murray/jekyll-twitter-plugin
   $text = preg_replace_callback(
-    "/<blockquote class=\"twitter-tweet\">(.*)(?<!<\/blockquote>)<\/blockquote>/u",
+    "/<blockquote class=\"twitter-tweet(.*)(?<!<\/blockquote>)<\/blockquote>/u",
     function($match) {
-      return preg_replace("/.*<a href=\"(https:\/\/twitter.com\/[^\/]+\/statuses\/[^\"]+)\">[^<]+<\/a>$/u", "{% twitter oembed $1 %}", $match[1]);
+      return preg_replace("/.*<a href=\"(https:\/\/twitter.com\/[^\/]+\/status(es)?\/[^\"]+)\"[^>]*>[^<]+<\/a>$/u", "{% twitter oembed $1 %}", $match[1]);
     },
     $text
   );
-  $text = str_replace("<script async src=\"//platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>", "", $text);
+  $text = preg_replace("/<script (async )?src=\"\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"><\/script>/u", "", $text);
 
   return $text;
 }
