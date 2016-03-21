@@ -1,13 +1,13 @@
 <paquet
-	prefix="spip2markdown"
-	categorie="outil"
-	version="0.2.1"
-	etat="dev"
+  prefix="spip2markdown"
+  categorie="outil"
+  version="0.2.2"
+  etat="dev"
   logo="prive/themes/spip/images/spip2markdown-32.png"
   compatibilite="[3.0.0;3.1.*]">
-	<nom>SPIP → Markdown</nom>
-	<auteur lien="https://twitter.com/nhoizey">Nicolas Hoizey</auteur>
-	<licence>MIT</licence>
+  <nom>SPIP → Markdown</nom>
+  <auteur lien="https://twitter.com/nhoizey">Nicolas Hoizey</auteur>
+  <licence>MIT</licence>
   <necessite nom="saisies" compatibilite="[2.1.3;]" />
   <necessite nom="zippeur" compatibilite="[4.1.4;]" />
   <pipeline nom="affiche_gauche" action="affiche_gauche" inclure="spip2markdown_pipelines.php" />
