@@ -205,7 +205,7 @@ function spip2markdown_documents($text) {
         if (strlen($doc['titre']) > 0 || strlen($doc['descriptif']) > 0) {
           $doc_str .= "\n  <figcaption>";
           if (strlen($doc['titre']) > 0) {
-            $doc_str .= "\n    " . spip2markdown($doc['titre']);
+            $doc_str .= "\n  " . spip2markdown($doc['titre']);
           }
           if (strlen($doc['descriptif']) > 0) {
             if (strlen($doc['titre']) > 0) {
