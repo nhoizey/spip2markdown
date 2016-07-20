@@ -22,6 +22,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'cfg_youtube_explication' => 'Générer la balise Liquid pour le <a href="https://github.com/erossignon/jekyll-youtube-lazyloading">plugin Jekyll Youtube Lazyloading</a>&nbsp;?',
   'cfg_twitter' => 'Convertir les embed Twitter&nbsp;?',
   'cfg_twitter_explication' => 'Générer la balise Liquid pour le <a href="https://github.com/rob-murray/jekyll-twitter-plugin">plugin Jekyll Twitter</a>&nbsp;?',
+  'cfg_cloudinary' => 'Utiliser pour les images la syntaxe du plugin Jekyll Cloudinary&nbsp;?',
+  'cfg_cloudinary_explication' => 'Générer la balise Liquid pour le <a href="https://github.com/nhoizey/jekyll-cloudinary">plugin Jekyll Cloudinary</a>&nbsp;?',
   'voir' => 'Voir',
   'ou' => 'ou',
   'telecharger' => 'télécharger',

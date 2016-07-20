@@ -201,9 +201,17 @@ function spip2markdown_documents($text) {
       $doc_id = $match[2];
       $doc = sql_fetsel("titre, descriptif, fichier, mode, media", "spip_documents", "id_document=$doc_id");
       if ($doc['media'] == "image") {
-        $doc_str = "<figure>\n  {% picture " . basename($doc['fichier']) . " %}";
+        if(lire_config("spip2markdown/cloudinary") == "oui") {
+          $doc_str = "{% cloudinary " . basename($doc['fichier']);
+        } else {
+          $doc_str = "<figure>\n  {% picture " . basename($doc['fichier']) . " %}";
+        }
         if (strlen($doc['titre']) > 0 || strlen($doc['descriptif']) > 0) {
-          $doc_str .= "\n  <figcaption>";
+          if(lire_config("spip2markdown/cloudinary") == "oui") {
+            $doc_str .= " caption=\"";
+          } else {
+            $doc_str .= "\n  <figcaption>";
+          }
           if (strlen($doc['titre']) > 0) {
             $doc_str .= "" . preg_replace("/\n$/", "", spip2markdown($doc['titre']));
           }
@@ -213,9 +221,17 @@ function spip2markdown_documents($text) {
             }
             $doc_str .= preg_replace("/\n$/", "", spip2markdown($doc['descriptif']));
           }
-          $doc_str .= "  </figcaption>";
+          if(lire_config("spip2markdown/cloudinary") == "oui") {
+            $doc_str .= "\"";
+          } else {
+            $doc_str .= "  </figcaption>";
+          }
         }
-        $doc_str .= "\n</figure>\n";
+        if(lire_config("spip2markdown/cloudinary") == "oui") {
+          $doc_str .= " %}\n";
+        } else {
+          $doc_str .= "\n</figure>\n";
+        }
       } else {
         $doc_str = "[" . $doc['titre'] . "](" . basename($doc['fichier']) . ")";
       }
