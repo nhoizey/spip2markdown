@@ -2,6 +2,7 @@
 include_spip('inc/config');
 
 function spip2markdown($text, $context = '') {
+  $text = spip2markdown_normaliser_retours_chariot($text);
   list($text, $code) = spip2markdown_extraire_code($text);
   $text = spip2markdown_liens($text);
   $text = spip2markdown_notes($text, $context);
@@ -21,6 +22,13 @@ function spip2markdown($text, $context = '') {
   if(lire_config("spip2markdown/twitter") == "oui") {
     $text = spip2markdown_twitter($text);
   }
+
+  return $text;
+}
+
+function spip2markdown_normaliser_retours_chariot($text) {
+  $text = preg_replace("/\r\n/u", "\n", $text);
+  $text = preg_replace("/\n\r/u", "\n", $text);
 
   return $text;
 }
