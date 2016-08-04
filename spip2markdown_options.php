@@ -143,6 +143,7 @@ function spip2markdown_gras($text) {
   // SPIP     : {{…}}
   // Kramdown : **…**
   $text = preg_replace("/(^|[^{]){{([^}]+)}}([^}]|$)/u", "$1**$2**$3", $text);
+  $text = preg_replace("/(^|[^{]){{([^}]+)}}([^}]|$)/u", "$1**$2**$3", $text);
 
   return $text;
 }
@@ -150,6 +151,7 @@ function spip2markdown_gras($text) {
 function spip2markdown_italiques($text) {
   // SPIP     : {…}
   // Kramdown : *…*
+  $text = preg_replace("/(^|[^{]){([^}]+)}([^}]|$)/u", "$1*$2*$3", $text);
   $text = preg_replace("/(^|[^{]){([^}]+)}([^}]|$)/u", "$1*$2*$3", $text);
 
   return $text;
