@@ -1,10 +1,10 @@
 <?php
 include_spip('inc/config');
 
-function spip2markdown($text) {
+function spip2markdown($text, $context = '') {
   list($text, $code) = spip2markdown_extraire_code($text);
   $text = spip2markdown_liens($text);
-  $text = spip2markdown_notes($text);
+  $text = spip2markdown_notes($text, $context);
   $text = spip2markdown_intertitres($text);
   $text = spip2markdown_gras($text);
   $text = spip2markdown_italiques($text);
@@ -101,7 +101,7 @@ function spip2markdown_liens($text) {
   return $text;
 }
 
-function spip2markdown_notes($text) {
+function spip2markdown_notes($text, $context) {
   // SPIP     : [[…]]
   // Kramdown : [^n] dans le texte et [^n]: … en fin de contenu
   $text = preg_replace("/(^|[^\[])\[\[([^\[]|$)/u", "$1☞$2", $text);
@@ -110,10 +110,10 @@ function spip2markdown_notes($text) {
   $notes = "\n";
   $text = preg_replace_callback(
     "/☞([^☜]+)☜/u",
-    function($match) use (&$count, &$notes) {
+    function($match) use (&$count, &$notes, &$context) {
       $count++;
-      $notes .= "\n\n[^" . $count . "]: " . $match[1];
-      return "[^" . $count . "]";
+      $notes .= "\n\n[^" . $context . $count . "]: " . $match[1];
+      return "[^" . $context . $count . "]";
     },
     $text
   );
