@@ -45,7 +45,7 @@ function spip2markdown_extraire_code($text) {
 
 function spip2markdown_reinserer_code($text, $code) {
   // SPIP     : <code>…</code>
-  // Kramdown : ~~~\n~~~ pour code en bloc et `…` pour code en ligne
+  // Kramdown : ```\n``` pour code en bloc et `…` pour code en ligne
 
   // réinsertion du code préalablement extrait
   foreach ($code as $key => $value) {
@@ -53,8 +53,8 @@ function spip2markdown_reinserer_code($text, $code) {
   }
 
   // code en bloc
-  $text = preg_replace("/\n<code( class=\"([^\"]+)\")?>\n/u", "\n~~~ $2\n", $text);
-  $text = preg_replace("/\n<\/code>\n/u", "\n~~~\n", $text);
+  $text = preg_replace("/\n<code( class=\"([^\"]+)\")?>\n/u", "\n```$2\n", $text);
+  $text = preg_replace("/\n<\/code>\n/u", "\n```\n", $text);
 
   // code en ligne
   $text = preg_replace("/<\/?code>/u", "`", $text);
