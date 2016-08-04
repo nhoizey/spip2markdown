@@ -65,7 +65,7 @@ function spip2markdown_reinserer_code($text, $code) {
   $text = preg_replace("/\n<\/code>\n/u", "\n```\n", $text);
 
   // code en ligne
-  $text = preg_replace("/<\/?code>/u", "`", $text);
+  $text = preg_replace("/<\/?code([^>]*)>/u", "`", $text);
 
   return $text;
 }
