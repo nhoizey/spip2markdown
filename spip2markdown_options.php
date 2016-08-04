@@ -160,12 +160,12 @@ function spip2markdown_italiques($text) {
 function spip2markdown_citations($text) {
   // SPIP     : <quote>…</quote>
   // Kramdown : >
-  $text = preg_replace("/<quote>/u", "☞", $text);
-  $text = preg_replace("/<\/quote>/u", "☜", $text);
+  $text = preg_replace("/<quote>\n?/u", "☞", $text);
+  $text = preg_replace("/\n?<\/quote>/u", "☜", $text);
   $text = preg_replace_callback(
     "/☞([^☜]+)☜/u",
     function($match) {
-      return "> ".preg_replace("/\n/u", "\n> ", $match[1]);
+      return "\n> ".preg_replace("/\n/u", "\n> ", $match[1]);
     },
     $text
   );
