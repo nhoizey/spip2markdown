@@ -36,8 +36,8 @@ function spip2markdown_normaliser_retours_chariot($text) {
 function spip2markdown_extraire_code($text) {
   $code = [];
 
-  $text = preg_replace("/<code([^>]*>)/u", "☞$1", $text);
-  $text = preg_replace("/<\/code>/u", "☜", $text);
+  $text = preg_replace("/<code([^>]*>)/ui", "☞$1", $text);
+  $text = preg_replace("/<\/code>/ui", "☜", $text);
   $count = 0;
   $text = preg_replace_callback(
     "/☞([^☜]+)☜/u",
@@ -61,11 +61,11 @@ function spip2markdown_reinserer_code($text, $code) {
   }
 
   // code en bloc
-  $text = preg_replace("/\n<code( class=\"([^\"]+)\")?>\n/u", "\n```$2\n", $text);
-  $text = preg_replace("/\n<\/code>\n/u", "\n```\n", $text);
+  $text = preg_replace("/\n<code( class=\"([^\"]+)\")?>\n/ui", "\n```$2\n", $text);
+  $text = preg_replace("/\n<\/code>\n/ui", "\n```\n", $text);
 
   // code en ligne
-  $text = preg_replace("/<\/?code([^>]*)>/u", "`", $text);
+  $text = preg_replace("/<\/?code([^>]*)>/ui", "`", $text);
 
   return $text;
 }
@@ -160,8 +160,8 @@ function spip2markdown_italiques($text) {
 function spip2markdown_citations($text) {
   // SPIP     : <quote>…</quote>
   // Kramdown : >
-  $text = preg_replace("/<quote>\n?/u", "☞", $text);
-  $text = preg_replace("/\n?<\/quote>/u", "☜", $text);
+  $text = preg_replace("/<quote>\n?/ui", "☞", $text);
+  $text = preg_replace("/\n?<\/quote>/ui", "☜", $text);
   $text = preg_replace_callback(
     "/☞([^☜]+)☜/u",
     function($match) {
@@ -206,7 +206,7 @@ function spip2markdown_documents($text) {
   //   cf https://github.com/gettalong/kramdown/issues/48#issuecomment-16698925
   // - ou un lien
   $text = preg_replace_callback(
-    "/<(doc|img|emb)([0-9]+)[^0-9>]*>/u",
+    "/<(doc|img|emb)([0-9]+)[^0-9>]*>/ui",
     function($match) {
       $doc_id = $match[2];
       $doc = sql_fetsel("titre, descriptif, fichier, mode, media", "spip_documents", "id_document=$doc_id");
