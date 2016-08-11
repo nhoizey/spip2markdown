@@ -1,4 +1,4 @@
-<BOUCLE_article(ARTICLES){id_article}>#CACHE{0}
+<BOUCLE_article(ARTICLES){id_article}{statut IN prop,prepa,publie,refuse,poubelle}>#CACHE{0}
 [(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]}
 )][(#HTTP_HEADER{Content-Disposition: attachment; filename="[(#DATE|date_iso|couper{10})]-[(#URL_ARTICLE|replace{.*/,})].md"}
 )]#INCLURE{fond=article2markdown-contenu,id_article}</BOUCLE_article>

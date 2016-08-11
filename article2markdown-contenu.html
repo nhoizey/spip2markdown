@@ -1,4 +1,4 @@
-<BOUCLE_article(ARTICLES){id_article}>---[(#CONFIG{spip2markdown/title}|=={oui}|oui)
+<BOUCLE_article(ARTICLES){id_article}{statut IN prop,prepa,publie,refuse,poubelle}>---[(#CONFIG{spip2markdown/title}|=={oui}|oui)
 title:      "#TITRE**"][(#CONFIG{spip2markdown/date_iso}|=={oui}|oui)
 date:       [(#DATE|date_iso|couper{10})]][(#CONFIG{spip2markdown/authors}|=={oui}|oui)
 author:     #INCLURE{fond=article2markdown_auteurs,env}][(#CONFIG{spip2markdown/lang}|=={oui}|oui)
