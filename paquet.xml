@@ -1,7 +1,7 @@
 <paquet
   prefix="spip2markdown"
   categorie="outil"
-  version="0.2.8"
+  version="0.2.9"
   etat="dev"
   logo="prive/themes/spip/images/spip2markdown-32.png"
   compatibilite="[3.0.0;3.1.*]">
