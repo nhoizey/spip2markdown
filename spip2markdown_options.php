@@ -23,6 +23,8 @@ function spip2markdown($text, $context = '') {
     $text = spip2markdown_twitter($text);
   }
 
+  $text = spip2markdown_nettoyer($text);
+
   return $text;
 }
 
@@ -275,3 +277,10 @@ function spip2markdown_twitter($text) {
 
   return $text;
 }
+
+function spip2markdown_nettoyer($text) {
+  $text = preg_replace("/(^\n+|\n+$)/u", "", $text);
+  $text = preg_replace("/<\/?CENTER>/ui", "", $text);
+  return $text;
+}
+
