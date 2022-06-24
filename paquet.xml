@@ -1,12 +1,12 @@
 <paquet
   prefix="spip2markdown"
   categorie="outil"
-  version="0.2.9"
+  version="0.3.0"
   etat="dev"
   logo="prive/themes/spip/images/spip2markdown-32.png"
-  compatibilite="[3.0.0;3.1.*]">
+  compatibilite="[3.0.0;4.*]">
   <nom>SPIP → Markdown</nom>
-  <auteur lien="https://twitter.com/nhoizey">Nicolas Hoizey</auteur>
+  <auteur lien="https://nicolas-hoizey.com/">Nicolas Hoizey</auteur>
   <licence>MIT</licence>
   <necessite nom="saisies" compatibilite="[2.1.3;]" />
   <necessite nom="zippeur" compatibilite="[4.1.4;]" />
